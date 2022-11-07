@@ -4,7 +4,9 @@ from tkinter.messagebox import showinfo
 from capturadoRostros import faceCapture
 import os
 import sys
+from ReconocimientoFacial import facerec
 # root window
+
 root = tk.Tk()
 root.geometry("300x150")
 root.resizable(False, False)
@@ -26,18 +28,35 @@ def login_clicked():
 
 
     faceCapture(email.get())
+    facerec()
     email.set('')
     password.set('')
     respuesta=tk.messagebox.askquestion(message="¿Desea continuar?", title="Título")
     if respuesta == True:
-        root.update()
+        try:
+            root.destroy()
+            root.quit()
+            print("Leyendo datos")
+            facerec()
+
+
+        except:
+            print('No se pudo')
+
+
+
+
+
+        ''' root.update()
         root.destroy()
         root.__init__()
+        '''
+
 
 
     if respuesta==False:
         root.destroy()
-        sys.exit()
+        root.quit()
 
 
 # Sign in frame
