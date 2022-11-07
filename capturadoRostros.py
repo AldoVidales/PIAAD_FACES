@@ -37,7 +37,7 @@ def faceCapture(email):
 		cv2.imshow('frame',frame)
 
 		k =  cv2.waitKey(1)
-		if k == 27 or count >= 150:
+		if k == 27 or count >= 170:
 			break
 
 	cap.release()

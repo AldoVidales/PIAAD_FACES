@@ -5,6 +5,7 @@ from capturadoRostros import faceCapture
 import os
 import sys
 from ReconocimientoFacial import facerec
+from entrenandoRF import training
 # root window
 
 root = tk.Tk()
@@ -28,15 +29,19 @@ def login_clicked():
 
 
     faceCapture(email.get())
+
+    print("training")
+    training()
+    root.destroy()
     facerec()
+
     email.set('')
     password.set('')
     respuesta=tk.messagebox.askquestion(message="¿Desea continuar?", title="Título")
     if respuesta == True:
         try:
-            root.destroy()
-            root.quit()
             print("Leyendo datos")
+
             facerec()
 
 
