@@ -1,3 +1,4 @@
+import time
 import tkinter as tk
 from tkinter import ttk
 from tkinter.messagebox import showinfo
@@ -6,10 +7,11 @@ import os
 import sys
 from ReconocimientoFacial import facerec
 from entrenandoRF import training
-# root window
 
+# root window
+facerec()
 root = tk.Tk()
-root.geometry("300x150")
+root.geometry("300x200")
 root.resizable(False, False)
 root.title('Sign In')
 
@@ -32,7 +34,6 @@ def login_clicked():
 
     print("training")
     training()
-    root.destroy()
     facerec()
 
     email.set('')
@@ -87,6 +88,13 @@ password_entry.pack(fill='x', expand=True)
 # login button
 login_button = ttk.Button(signin, text="Login", command=login_clicked)
 login_button.pack(fill='x', expand=True, pady=10)
+
+record_button = ttk.Button(text="RECORD", command=facerec)
+record_button.pack(fill='x', expand=True, pady=12)
+
+
+
+
 
 
 

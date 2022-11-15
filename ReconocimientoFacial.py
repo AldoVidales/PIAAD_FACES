@@ -1,5 +1,6 @@
 import cv2
 import os
+from Arduino_Mod import loggin_led
 def facerec():
     dataPath = './Data' #Cambia a la ruta donde hayas almacenado Data
     imagePaths=os.listdir(dataPath)
@@ -28,7 +29,7 @@ def facerec():
             rostro=cv2.resize(rostro,(150,150),interpolation=cv2.INTER_CUBIC)
             result=face_recognizer.predict(rostro)
 
-            cv2.putText(frame,'{}'.format(result),(x,y-5),1,1.3,(255,255,0),1,cv2.LINE_AA)
+            #cv2.putText(frame,'{}'.format(result),(x,y-5),1,1.3,(255,255,0),1,cv2.LINE_AA)
 
             '''#EigenFaces
             if result[1]<4000:
@@ -54,13 +55,16 @@ def facerec():
                 cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
                 print("aceptado")
                 print(f"HOLA {imagePaths[result[0]]}")
+                loggin_led()
                 cap.release()
                 cv2.destroyAllWindows()
                 break
+
     
             else:
                 cv2.putText(frame, 'Desconocido', (x, y - 20), 2, 0.8, (0, 255, 0), 1, cv2.LINE_AA)
                 cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+
 
             #LBFace
             '''if result[1] < 75:
@@ -85,4 +89,3 @@ def facerec():
 
     cap.release()
     cv2.destroyAllWindows()
-facerec()
